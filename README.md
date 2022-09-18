@@ -120,6 +120,17 @@ ffmpeg -f concat -i mylist.txt -c copy output.mp4
 
 ### Tips
 
+#### Lossless cropping
+
+```shell
+ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy OUTPUT
+```
+
+- `vcodec copy`
+- `acodec copy`
+
+表示所要使用的视频和音频的编码格式，这里指定为copy表示原样拷贝；
+
 #### make telegram image strikers
 
 ```shell
