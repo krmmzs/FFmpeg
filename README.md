@@ -1,5 +1,9 @@
 # FFmpeg
 
+## resources
+
+[piaoyun/ffmpeg.mdffmpeg 视频合并、格式转换、截图](https://gist.github.com/piaoyun/3f0373c9ce40badd384df37712847e21)
+
 ## Useful command parameters
 
 ### video envoder
@@ -120,6 +124,15 @@ ffmpeg -f concat -i mylist.txt -c copy output.mp4
 
 ### Tips
 
+#### merge mp4
+
+```shell
+ffmpeg -i "1.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate1.ts
+ffmpeg -i "2.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate2.ts
+ffmpeg -i "3.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate3.ts
+ffmpeg -i "concat:intermediate1.ts|intermediate2.ts|intermediate3.ts" -c copy -bsf:a aac_adtstoasc "output.mp4"
+```
+
 #### Lossless cropping
 
 ```shell
@@ -167,3 +180,17 @@ ffmpeg -i test.avi -ss 0 -t 3 -filter_complex [0:v]fps=15,scale=-1:256,split[a][
 
 gif 不太适合太长的视频，所以剪成 3 秒的视频，用过滤器缩放视频和调整帧率
 `split[a][b];[a]palettegen[p];[b][p]paletteuse` 是因为 gif256 色的限制，需要创建一个调色板
+
+#### screenshot
+
+每隔一秒截一张图
+
+```shell
+ffmpeg -i out.mp4 -f image2 -vf fps=fps=1 out%d.png
+```
+
+每隔20秒截一张图
+
+```shell
+ffmpeg -i out.mp4 -f image2 -vf fps=fps=1/20 out%d.png
+```
