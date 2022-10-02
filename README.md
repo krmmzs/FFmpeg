@@ -35,13 +35,13 @@ Manually specify a video encoder.
 #### tldr
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.mp4
 ```
 
 (h264_nvenc == libx264 + NVIDIA video card(Hardware acceleration)
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -preset veryfast output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -preset veryfast output.mp4
 ```
 
 (-preset xxx)
@@ -68,7 +68,7 @@ often use: 19-28
 #### tldr
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.mp4
 ```
 
 ### video filter
@@ -80,29 +80,29 @@ ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.map4
 #### tldr
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=1024:576" output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=1024:576" output.mp4
 
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=-1:720" output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=-1:720" output.mp4
 ```
 
 where -1 lets ffmpeg help with the derivation
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "transpose=1" output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "transpose=1" output.mp4
 
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=256:256, transpose=1" output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=256:256, transpose=1" output.mp4
 ```
 
 Rotation
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "crop:400:400:100:100" output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "crop:400:400:100:100" output.mp4
 ```
 
 crop=w : h : x : y(wide, height, coordinates of the upper left corner)
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "crop=iw/3:ih/3" output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "crop=iw/3:ih/3" output.mp4
 ```
 
 iw(input width)
@@ -116,9 +116,9 @@ iw(input width)
 #### tldr
 
 ```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -t 00:00:05 output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -t 00:00:05 output.mp4
 
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -to 00:00:08 output.map4
+ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -to 00:00:08 output.mp4
 ```
 
 ### Video merging
