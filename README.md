@@ -22,11 +22,13 @@
 
 [piaoyun/ffmpeg.mdffmpeg 视频合并、格式转换、截图](https://gist.github.com/piaoyun/3f0373c9ce40badd384df37712847e21)
 
+[ruanyifeng](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
+
 ## Useful command parameters
 
 ### video envoder
 
-```shell
+```bash
 -c:v
 ```
 
@@ -34,13 +36,17 @@ Manually specify a video encoder.
 
 #### tldr
 
-```shell
-ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.mp4
+```bash
+ffmpeg \
+-loglevel error \
+-i 1.mkv \
+-c:v h264_nvenc \
+output.mp4
 ```
 
 (h264_nvenc == libx264 + NVIDIA video card(Hardware acceleration)
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -preset veryfast output.mp4
 ```
 
@@ -58,7 +64,7 @@ xxx:
 
 ### constant rate factor
 
-```shell
+```bash
 -crf
 ```
 
@@ -67,19 +73,19 @@ often use: 19-28
 
 #### tldr
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc output.mp4
 ```
 
 ### video filter
 
-```shell
+```bash
 -vf
 ```
 
 #### tldr
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=1024:576" output.mp4
 
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=-1:720" output.mp4
@@ -87,7 +93,7 @@ ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=-1:720" output.mp4
 
 where -1 lets ffmpeg help with the derivation
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "transpose=1" output.mp4
 
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=256:256, transpose=1" output.mp4
@@ -95,13 +101,13 @@ ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "scale=256:256, transpose=1"
 
 Rotation
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "crop:400:400:100:100" output.mp4
 ```
 
 crop=w : h : x : y(wide, height, coordinates of the upper left corner)
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -vf "crop=iw/3:ih/3" output.mp4
 ```
 
@@ -109,13 +115,13 @@ iw(input width)
 
 ### Video cropping
 
-```shell
+```bash
 -ss <start time> -t <length of time> -to <end time>
 ```
 
 #### tldr
 
-```shell
+```bash
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -t 00:00:05 output.mp4
 
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -to 00:00:08 output.mp4
@@ -134,7 +140,7 @@ mylist.txt:
 
 #### tldr
 
-```shell
+```bash
 ffmpeg -f concat -i mylist.txt -c copy output.mp4
 ```
 
@@ -144,7 +150,7 @@ ffmpeg -f concat -i mylist.txt -c copy output.mp4
 
 ### merge mp4
 
-```shell
+```bash
 ffmpeg -i "1.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate1.ts
 ffmpeg -i "2.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate2.ts
 ffmpeg -i "3.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate3.ts
@@ -153,7 +159,7 @@ ffmpeg -i "concat:intermediate1.ts|intermediate2.ts|intermediate3.ts" -c copy -b
 
 ### Lossless cropping
 
-```shell
+```bash
 ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy OUTPUT
 ```
 
@@ -172,7 +178,7 @@ ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy -avoid_negative_
 
 ### make telegram image strikers
 
-```shell
+```bash
 ffmpeg -i image_2022-09-18_11-02-56.png -vf scale=512:-1 1.png
 ```
 
@@ -180,7 +186,7 @@ telegram needs png of 512:-1
 
 ### Create Thumbnails
 
-```shell
+```bash
 ffmpeg -i test.mp4 -vf "fps=1/10,scale=-2:720" thumbnail-%03d.jpg
 ```
 
@@ -189,7 +195,7 @@ ffmpeg -i test.mp4 -vf "fps=1/10,scale=-2:720" thumbnail-%03d.jpg
 
 ### Add watermark
 
-```shell
+```bash
 ffmpeg -i test.mp4 cat.jpg -filter_complex "overlay=100:100" output.mp4
 ```
 
@@ -200,7 +206,7 @@ ffmpeg -i test.mp4 cat.jpg -filter_complex "overlay=100:100" output.mp4
 
 ### gif animation conversion
 
-```shell
+```bash
 ffmpeg -i test.avi -ss 0 -t 3 -filter_complex [0:v]fps=15,scale=-1:256,split[a][b];[a]palettegen[p];[b][p]paletteuse output.gif
 ```
 
@@ -211,12 +217,21 @@ gif 不太适合太长的视频，所以剪成 3 秒的视频，用过滤器缩�
 
 每隔一秒截一张图
 
-```shell
+```bash
 ffmpeg -i out.mp4 -f image2 -vf fps=fps=1 out%d.png
 ```
 
 每隔20秒截一张图
 
-```shell
+```bash
 ffmpeg -i out.mp4 -f image2 -vf fps=fps=1/20 out%d.png
+```
+
+### Extract audio
+
+```bash
+ffmpeg \
+-i input.mp4 \
+-vn -c:a copy \
+output.aac
 ```
