@@ -162,6 +162,14 @@ ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy OUTPUT
 
 表示所要使用的视频和音频的编码格式，这里指定为copy表示原样拷贝；
 
+有可能会出现一些黑屏或者有负秒的出现: 见[文章](https://krmmzs.com/2022/10/23/ffmpeg-crop-anime-Bocchi-the-Rock-record/)
+
+如果copy,最好带上 -avoid_negative_ts 1
+
+```bash
+ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy -avoid_negative_ts 1 OUTPUT
+```
+
 ### make telegram image strikers
 
 ```shell
