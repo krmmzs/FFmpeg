@@ -20,9 +20,13 @@
 
 ## Resources
 
-[piaoyun/ffmpeg.mdffmpeg 视频合并、格式转换、截图](https://gist.github.com/piaoyun/3f0373c9ce40badd384df37712847e21)
+- [piaoyun/ffmpeg.mdffmpeg 视频合并、格式转换、截图](https://gist.github.com/piaoyun/3f0373c9ce40badd384df37712847e21)
 
-[ruanyifeng](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
+- [ruanyifeng](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
+
+- [leandromoreira/ffmpeg-libav-tutorialtext](https://github.com/leandromoreira/ffmpeg-libav-tutorial/blob/master/README-cn.md)
+
+- [How to Write a Video Player in](http://dranger.com/ffmpeg/)
 
 ## Useful command parameters
 
