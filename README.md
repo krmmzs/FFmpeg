@@ -131,6 +131,25 @@ ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -t 00:00:05 output.
 ffmpeg -i 1.mkv -loglevel error -c:v h264_nvenc -ss 00:00:03 -to 00:00:08 output.mp4
 ```
 
+#### Better command
+
+More see [ffmpeg crop anime Bocchi the Rock record](http://krmmzs.com/2022/10/23/Anime/FFmpeg/ffmpeg-crop-anime-Bocchi-the-Rock-record/)
+
+```bash
+ffmpeg -ss 00:14:44 -t 40 -i 2.mp4 -vcodec copy -acodec copy -avoid_negative_ts 1 02.mp4
+```
+
+#### mkv Ex
+
+```bash
+#!/bin/bash
+
+mkv=./NC_Raws_Bocchi_the_Rock_06_CR_1920x1080_AVC_AAC_MKV_2070.mkv
+start="00:00:03"
+time="10"
+ffmpeg -i ${mkv} -ss ${start} -t ${time} -loglevel error -c:v copy -avoid_negative_ts 1 output.mkv
+```
+
 ### Video merging
 
 Need to list file names to txt file summary before merging starts
