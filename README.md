@@ -30,6 +30,14 @@
 
 ## Useful command parameters
 
+### Video 10x compression
+
+ffmpeg -i input.mp4 -c:v libx264 -tag:v avc1 -movflags faststart -crf 30 -preset superfast output.mp4
+
+关键点在于crf 30，是一个显著能减少大小但是质量损失较小的点。
+
+https://tools.rotato.app/compress
+
 ### video envoder
 
 ```bash
