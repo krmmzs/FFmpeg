@@ -1,5 +1,9 @@
 # FFmpeg
 
+## Notion
+
+[https://www.notion.so/FFmpeg-2065e50cb271800fbe8ed35346e12627](https://www.notion.so/FFmpeg-2065e50cb271800fbe8ed35346e12627)
+
 ## Overview
 
 - [Resources](#resources)
@@ -264,5 +268,7 @@ ffmpeg -i out.mp4 -f image2 -vf fps=fps=1/20 out%d.png
 ffmpeg \
 -i input.mp4 \
 -vn -c:a copy \
+output.aac
+```
 output.aac
 ```
